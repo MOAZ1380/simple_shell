@@ -4,6 +4,7 @@
  * @command: moa
  * Return: o
 */
+
 char *location(char *command)
 {
 	char *path, *path_copy, *path_token, *file_path;

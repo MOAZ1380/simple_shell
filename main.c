@@ -5,22 +5,23 @@
  * @argv: moa
  * Return: mo
 */
-extern char **environ;
+
 int main(int argc, char **argv)
 {
 
-	char* prompt = "(Eshell) $ ";
-	char* buff_prompt = NULL;
-	char* buffcopy_prompt = NULL;
-	const char* delim = " \n";
-	char* token;
+	char *prompt = "(Eshell) $ ";
+	char *buff_prompt = NULL;
+	char *buffcopy_prompt = NULL;
+	const char *delim = " \n";
+	char *token;
 	int num_tokens = 0;
 	int i;
 	size_t n = 0;
 	ssize_t nchars_read;
+
 	(void)argc;
 
-	while(1)
+	while (1)
 	{
 	printf("%s", prompt);
 	nchars_read = getline(&buff_prompt, &n, stdin);
@@ -37,15 +38,15 @@ int main(int argc, char **argv)
 			}
 		strcpy(buffcopy_prompt, buff_prompt);
 		token = strtok(buff_prompt, delim);
-		while(token != NULL)
+		while (token != NULL)
 		{
 		num_tokens++;
 		token = strtok(NULL, delim);
 		}
 		num_tokens++;
-		argv = malloc(sizeof(char*) * num_tokens);
+		argv = malloc(sizeof(char *) * num_tokens);
 		token = strtok(buffcopy_prompt, delim);
-		for(i = 0; token != NULL; i++)
+		for (i = 0; token != NULL; i++)
 		{
 			argv[i] = malloc(sizeof(char) * strlen(token + 1));
 			strcpy(argv[i], token);
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
 		}
 
 		execute(argv);
-		for(i = 0; i < num_tokens; i++)
+		for (i = 0; i < num_tokens; i++)
 			free(argv[i]);
 		free(argv);
 			free(buffcopy_prompt);
