@@ -1,10 +1,12 @@
 #include "main.h"
+#include <unistd.h>
+#include <stdlib.h>
+
 /**
  * _getenv - mo
  * @name: mo
  * Return: mo
 */
-extern char **environ;
 char *_getenv(const char *name)
 {
 	for (char **env = environ; *env != NULL; env++)
@@ -16,9 +18,8 @@ char *_getenv(const char *name)
 			size_t name_length = equal_pos - *env;
 
 			if (strncmp(*env, name, name_length) == 0 && name[name_length] == '\0')
-				return (qual_pos + 1)
+				return (equal_pos + 1);
 		}
 	}
-}
-return (NULL);
+	return (NULL);
 }
