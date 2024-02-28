@@ -5,7 +5,7 @@
  * @argv: moa
  * Return: mo
 */
-
+extern char **environ;
 int main(int argc, char **argv)
 {
 
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	size_t n = 0;
 	ssize_t nchars_read;
 	(void)argc;
-	/* char **argv = NULL;**/
+
 	while(1)
 	{
 	printf("%s", prompt);
@@ -52,17 +52,14 @@ int main(int argc, char **argv)
 			token = strtok(NULL, delim);
 		}
 		argv[i] = NULL;
-		if(strcmp(argv[0], "exit") == 0)
+		if (strcmp(argv[0], "exit") == 0)
 		{
 			printf("Exiting shell....\n");
 			break;
 		}
-		else if(strcmp(argv[0], "env") == 0)
+		else if (strcmp(argv[0], "env") == 0)
 		{
-			for (char **env = environ; *env != NULL; env++)
-			{
-				printf("%s\n", *env);
-			}
+			print_environment();
 		}
 
 		execute(argv);
