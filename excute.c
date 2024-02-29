@@ -6,7 +6,7 @@
 */
 void execute(char **argv)
 {
-	char  *command = NULL, *actual_command = NULL;
+	char *command = NULL, *actual_command = NULL;
 
 	if (argv)
 	{
@@ -22,7 +22,7 @@ void execute(char **argv)
 		}
 		else if (pid == 0)
 		{
-			if (execve(actual_command, argv, NULL) == -1)
+			if (actual_command && execve(actual_command, argv, NULL) == -1)
 			{
 				perror("Error:");
 				exit(EXIT_FAILURE);
