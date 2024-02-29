@@ -24,20 +24,24 @@ int main(int argc, char **argv)
 
 	(void)argc;
 
+	if (isatty(STDIN_FILENO))
+	{
+		printf("%s", prompt);
+		fflush(stdout);
+	}
 	while (1)
 	{
-	nchars_read = getline(&buff_prompt, &n, stdin);
+		nchars_read = getline(&buff_prompt, &n, stdin);
 		if (nchars_read == -1)
 		{
 			exit(EXIT_FAILURE);
 		}
-			printf("%s", prompt);
-			buffcopy_prompt = malloc(sizeof(char) * nchars_read);
-			if (buffcopy_prompt == NULL)
-			{
-				perror("malloc  error");
-				return (-1);
-			}
+		buffcopy_prompt = malloc(sizeof(char) * nchars_read);
+		if (buffcopy_prompt == NULL)
+		{
+			perror("malloc  error");
+			return (-1);
+		}
 		strcpy(buffcopy_prompt, buff_prompt);
 		argv = tokenize_input(buff_prompt, &num_tokens);
 		if (strcmp(argv[0], "exit") == 0)
@@ -48,19 +52,18 @@ int main(int argc, char **argv)
 		{
 			print_environment();
 		}
-
 		execute(argv);
 		for (i = 0; i < num_tokens; i++)
 			free(argv[i]);
 		free(argv);
-			free(buffcopy_prompt);
-			continue;
+		free(buffcopy_prompt);
+		continue;
 	}
 	free(buff_prompt);
 	return (0);
 }
 /**
- * tokenize_input - moa
+ * okenize_input - moa
  * @buff_prompt: mo
  * @num_tokens: mo
  * Return: mo
