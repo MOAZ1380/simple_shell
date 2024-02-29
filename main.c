@@ -1,19 +1,22 @@
 #include "main.h"
 /**
- * main - moaz
- * @argc: moaz
- * @argv: moa
+ * tokenize_input - mo
+ * @buff_prompt: m
+ * @num_tokens: mo
  * Return: mo
 */
-
+char **tokenize_input(char *buff_prompt, int *num_tokens);
+/**
+ * main - moaz
+ * @argc: mo
+ * @argv: mo
+ * Return: mo
+*/
 int main(int argc, char **argv)
 {
-
 	char *prompt = "(Eshell) $ ";
 	char *buff_prompt = NULL;
 	char *buffcopy_prompt = NULL;
-	const char *delim = " \n";
-	char *token;
 	int num_tokens = 0;
 	int i;
 	size_t n = 0;
@@ -37,22 +40,7 @@ int main(int argc, char **argv)
 				return (-1);
 			}
 		strcpy(buffcopy_prompt, buff_prompt);
-		token = strtok(buff_prompt, delim);
-		while (token != NULL)
-		{
-		num_tokens++;
-		token = strtok(NULL, delim);
-		}
-		num_tokens++;
-		argv = malloc(sizeof(char *) * num_tokens);
-		token = strtok(buffcopy_prompt, delim);
-		for (i = 0; token != NULL; i++)
-		{
-			argv[i] = malloc(sizeof(char) * strlen(token + 1));
-			strcpy(argv[i], token);
-			token = strtok(NULL, delim);
-		}
-		argv[i] = NULL;
+		argv = tokenize_input(buff_prompt, &num_tokens);
 		if (strcmp(argv[0], "exit") == 0)
 		{
 			printf("Exiting shell....\n");
@@ -71,4 +59,45 @@ int main(int argc, char **argv)
 	}
 	free(buff_prompt);
 	return (0);
+}
+/**
+ * tokenize_input - moa
+ * @buff_prompt: mo
+ * @num_tokens: mo
+ * Return: mo
+*/
+char **tokenize_input(char *buff_prompt, int *num_tokens)
+{
+	const char *delim = " \n";
+	char *token;
+	int i;
+	char **argv;
+
+	token = strtok(buff_prompt, delim);
+	*num_tokens = 0;
+	while (token != NULL)
+	{
+		(*num_tokens)++;
+		token = strtok(NULL, delim);
+	}
+	argv = malloc(sizeof(char *) * (*num_tokens + 1));
+	if (argv == NULL)
+	{
+		perror("malloc  error");
+		exit(EXIT_FAILURE);
+	}
+	token = strtok(buff_prompt, delim);
+	for (i = 0; token != NULL; i++)
+	{
+		argv[i] = malloc(sizeof(char) * (strlen(token) + 1));
+		if (argv[i] == NULL)
+		{
+			perror("malloc  error");
+			exit(EXIT_FAILURE);
+		}
+		strcpy(argv[i], token);
+		token = strtok(NULL, delim);
+	}
+	argv[i] = NULL;
+	return (argv);
 }
