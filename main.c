@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	nchars_read = getline(&buff_prompt, &n, stdin);
 		if (nchars_read == -1)
 		{
-			break;
+			exit(EXIT_FAILURE);
 		}
 			buffcopy_prompt = malloc(sizeof(char) * nchars_read);
 			if (buffcopy_prompt == NULL)
@@ -42,8 +42,7 @@ int main(int argc, char **argv)
 		argv = tokenize_input(buff_prompt, &num_tokens);
 		if (strcmp(argv[0], "exit") == 0)
 		{
-			printf("Exiting shell....\n");
-			break;
+			exit(EXIT_FAILURE);
 		}
 		else if (strcmp(argv[0], "env") == 0)
 		{
