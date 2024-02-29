@@ -15,6 +15,10 @@ void execute(char **argv)
 		command = argv[0];
 
 		actual_command = location(command);
+		if (!actual_command)
+		{
+			goto continue_loop;
+		}
 		if (pid == -1)
 		{
 			perror("fork");
@@ -36,4 +40,6 @@ void execute(char **argv)
 			wait(&status);
 		}
 	}
+continue_loop:
+	return;
 }
