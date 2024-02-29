@@ -30,6 +30,7 @@ int main(int argc, char **argv)
 	nchars_read = getline(&buff_prompt, &n, stdin);
 		if (nchars_read == -1)
 		{
+			printf("Exiting shell....\n");
 			break;
 		}
 			buffcopy_prompt = malloc(sizeof(char) * nchars_read);
@@ -55,7 +56,6 @@ int main(int argc, char **argv)
 			free(argv[i]);
 		free(argv);
 			free(buffcopy_prompt);
-			continue;
 	}
 	free(buff_prompt);
 	return (0);

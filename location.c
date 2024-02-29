@@ -45,4 +45,3 @@ char *location(char *command)
 	}
 	return (NULL);
 }
-

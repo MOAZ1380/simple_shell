@@ -15,6 +15,11 @@ void execute(char **argv)
 		command = argv[0];
 
 		actual_command = location(command);
+		if (!actual_command)
+		{
+			printf("%s: command not found\n", command);
+			goto continue_loop;
+		}
 		if (pid == -1)
 		{
 			perror("fork");
@@ -22,22 +27,20 @@ void execute(char **argv)
 		}
 		else if (pid == 0)
 		{
-			if (actual_command && execve(actual_command, argv, NULL) == -1)
+			if (execve(actual_command, argv, NULL) == -1)
 			{
 				perror("Error:");
 				exit(EXIT_FAILURE);
 			}
-			else
-			{
-				printf("%s: command not found\n", command);
-				exit(EXIT_FAILURE);
-			}
+
 		}
 		else
 		{
 			int status;
-
 			wait(&status);
 		}
 	}
+
+continue_loop:
+	return;
 }
