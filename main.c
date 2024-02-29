@@ -14,7 +14,7 @@ char **tokenize_input(char *buff_prompt, int *num_tokens);
 */
 int main(int argc, char **argv)
 {
-	char *prompt = "(Eshell) $ ";
+	char *prompt = "#cisfun$ ";
 	char *buff_prompt = NULL;
 	char *buffcopy_prompt = NULL;
 	int num_tokens = 0;
