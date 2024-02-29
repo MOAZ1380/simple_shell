@@ -27,6 +27,11 @@ void execute(char **argv)
 				perror("Error:");
 				exit(EXIT_FAILURE);
 			}
+			else
+			{
+				printf("%s: command not found\n", command);
+				exit(EXIT_FAILURE);
+			}
 		}
 		else
 		{
