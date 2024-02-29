@@ -26,12 +26,13 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
-	printf("%s", prompt);
+
 	nchars_read = getline(&buff_prompt, &n, stdin);
 		if (nchars_read == -1)
 		{
 			exit(EXIT_FAILURE);
 		}
+		printf("%s", prompt);
 			buffcopy_prompt = malloc(sizeof(char) * nchars_read);
 			if (buffcopy_prompt == NULL)
 			{
