@@ -55,7 +55,6 @@ int main(int argc, char **argv)
 			free(argv[i]);
 		free(argv);
 			free(buffcopy_prompt);
-			continue;
 	}
 	free(buff_prompt);
 	return (0);
