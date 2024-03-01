@@ -3,9 +3,10 @@
  * tokenize_input - mo
  * @buff_prompt: m
  * @num_tokens: mo
+ * @buffcopy_prompt: moa
  * Return: mo
 */
-char **tokenize_input(char *buff_prompt, int *num_tokens);
+char **tokenize_input(char *buff_prompt, int *num_tokens, char *buffcopy_prompt);
 /**
  * main - moaz
  * @argc: mo
@@ -24,13 +25,12 @@ int main(int argc, char **argv)
 
 	(void)argc;
 
-	if (isatty(STDIN_FILENO))
-	{
-		printf("%s", prompt);
-		fflush(stdout);
-	}
 	while (1)
 	{
+		if (isatty(STDIN_FILENO))
+		{
+		printf("%s", prompt);
+		}
 		nchars_read = getline(&buff_prompt, &n, stdin);
 		if (nchars_read == -1)
 		{
@@ -42,8 +42,8 @@ int main(int argc, char **argv)
 			perror("malloc  error");
 			return (-1);
 		}
-		strcpy(buffcopy_prompt, buff_prompt);
-		argv = tokenize_input(buff_prompt, &num_tokens);
+		_strcpy(buffcopy_prompt, buff_prompt);
+		argv = tokenize_input(buff_prompt, &num_tokens, buffcopy_prompt);
 		if (strcmp(argv[0], "exit") == 0)
 		{
 			exit(EXIT_FAILURE);
@@ -66,9 +66,10 @@ int main(int argc, char **argv)
  * okenize_input - moa
  * @buff_prompt: mo
  * @num_tokens: mo
+ * @buffcopy_prompt: mo
  * Return: mo
 */
-char **tokenize_input(char *buff_prompt, int *num_tokens)
+char **tokenize_input(char *buff_prompt, int *num_tokens, char *buffcopy_prompt)
 {
 	const char *delim = " \n";
 	char *token;
@@ -88,10 +89,10 @@ char **tokenize_input(char *buff_prompt, int *num_tokens)
 		perror("malloc  error");
 		exit(EXIT_FAILURE);
 	}
-	token = strtok(buff_prompt, delim);
+	token = strtok(buffcopy_prompt, delim);
 	for (i = 0; token != NULL; i++)
 	{
-		argv[i] = malloc(sizeof(char) * (strlen(token) + 1));
+		argv[i] = malloc(sizeof(char) * (_strlen(token) + 1));
 		if (argv[i] == NULL)
 		{
 			perror("malloc  error");

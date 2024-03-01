@@ -12,5 +12,10 @@ void execute(char **argv);
 char *location(char *command);
 char *_getenv(const char *name);
 void print_environment(void);
+char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
+int _strlen(char *s);
+
+
 extern char **environ;
 #endif /* MAIN_H */
