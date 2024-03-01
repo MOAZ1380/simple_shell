@@ -36,8 +36,10 @@ int main(int argc, char **argv)
 		{
 			exit(EXIT_FAILURE);
 		}
+		buff_prompt[nchars_read - 1] = '\0';
 		buffcopy_prompt = malloc(sizeof(char) * nchars_read);
 		if (buffcopy_prompt == NULL)
+		
 		{
 			perror("malloc  error");
 			return (-1);
