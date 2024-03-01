@@ -6,7 +6,8 @@
  * @buffcopy_prompt: moa
  * Return: mo
 */
-char **tokenize_input(char *buff_prompt, int *num_tokens, char *buffcopy_prompt);
+char **tokenize_input(char *buff_prompt, int *num_tokens,
+char *buffcopy_prompt);
 /**
  * main - moaz
  * @argc: mo
@@ -15,7 +16,7 @@ char **tokenize_input(char *buff_prompt, int *num_tokens, char *buffcopy_prompt)
 */
 int main(int argc, char **argv)
 {
-	char *prompt = "#cisfun$ ";
+	char *prompt = "# ";
 	char *buff_prompt = NULL;
 	char *buffcopy_prompt = NULL;
 	int num_tokens = 0;
@@ -27,6 +28,7 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
+		printf("%s", prompt);
 		if (isatty(STDIN_FILENO))
 		{
 		printf("%s", prompt);
@@ -36,10 +38,8 @@ int main(int argc, char **argv)
 		{
 			exit(EXIT_FAILURE);
 		}
-		buff_prompt[nchars_read - 1] = '\0';
 		buffcopy_prompt = malloc(sizeof(char) * nchars_read);
 		if (buffcopy_prompt == NULL)
-		
 		{
 			perror("malloc  error");
 			return (-1);
@@ -71,7 +71,9 @@ int main(int argc, char **argv)
  * @buffcopy_prompt: mo
  * Return: mo
 */
-char **tokenize_input(char *buff_prompt, int *num_tokens, char *buffcopy_prompt)
+char **tokenize_input(char *buff_prompt, int *num_tokens,
+char *buffcopy_prompt)
+
 {
 	const char *delim = " \n";
 	char *token;
